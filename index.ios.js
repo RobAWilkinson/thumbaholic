@@ -14,11 +14,24 @@ class thumbaholic extends Component {
     this.state = { latitude: 39.78825,  longitude: -128.4324 }
   }
   componentDidMount = () => {
-    navigator.geolocation.getCurrentPosition( position => {
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
-      this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude })
-    });
+    // send data as stringified json with { channel: 'channel', user_id: user, lat: lng }
+    var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+    ws.onopen= () => {
+      navigator.geolocation.getCurrentPosition( position => {
+        let { latitude, longitude } = position.coords
+        ws.send(JSON.stringify({latitude, longitude }))
+      });
+    }
+    ws.onmessage = (e) => {
+      // a message was received
+      console.log(e);
+      navigator.geolocation.getCurrentPosition( position => {
+        let { latitude, longitude } = position.coords
+        console.log(latitude);
+        console.log(longitude);
+        ws.send(JSON.stringify({latitude, longitude }))
+      });
+    };
   }
   render () {
     console.log('render');
