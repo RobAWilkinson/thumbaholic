@@ -6,10 +6,56 @@
 
 import FitImage from 'react-native-fit-image'
 import React, { Component } from 'react'
-import { AppRegistry, StyleSheet, Text, Image, View, Navigator, TouchableHighlight, ScrollView } from 'react-native'
-import MapView from 'react-native-maps'
+import { 
+  AppRegistry, 
+  StyleSheet, 
+  Text, 
+  Image, 
+  View, 
+  Navigator, 
+  TouchableHighlight, 
+  AsyncStorage,
+  ScrollView
+} from 'react-native'
+import guid from './guid'
 
+var STORAGE_KEY = '@Thumbaholic:user_id';
 class Main extends React.Component{
+  componentDidMount() {
+    this._loadInitialState().done();
+    var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+    ws.onopen = () => {
+      navigator.geolocation.getCurrentPosition( position => {
+        let { latitude, longitude } = position.coords
+        console.log(position);
+        ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+      });
+    }
+    ws.onmessage = (e) => {
+      // a message was received
+      navigator.geolocation.getCurrentPosition(position => {
+        let { latitude, longitude } = position.coords
+        console.log(latitude);
+        console.log(longitude);
+        ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
+      });
+    };
+  }
+  async _loadInitialState() {
+    try {
+      var id = await AsyncStorage.getItem(STORAGE_KEY);
+      if (id !== null){
+        this.setState({ id });
+      } else {
+        id = guid()
+        await AsyncStorage.setItem(STORAGE_KEY, id);
+        this.setState({ id });
+      }
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
   navFirstAid() {
     this.props.navigator.push({
       id: 'first_aid_page'
@@ -20,7 +66,7 @@ class Main extends React.Component{
       id: 'food_page'
     })
   }
-  navRestrooms() {
+  navRestrooms () {
     this.props.navigator.push({
       id: 'restrooms_page'
     })
@@ -40,7 +86,6 @@ class Main extends React.Component{
       id: 'transportation_page'
     })
   }
-
   render() {
     return (
       <View style={styles.container}>
