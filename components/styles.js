@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    paddingTop: 10,
   },
   entrance_container: {
     flex: 1,
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    paddingTop: 10,
   },
   entrance_background: {
     position: 'absolute',
