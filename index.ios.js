@@ -3,9 +3,9 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+import React, { Component } from 'react'
 
 import FitImage from 'react-native-fit-image'
-import React, { Component } from 'react'
 import Food from './components/food'
 import Transportation from './components/transportation'
 import FirstAid from './components/firstAid'
@@ -21,6 +21,7 @@ import Wasteland from './components/wasteland'
 import styles from './components/styles'
 import {
   AppRegistry,
+  AppState,
   StyleSheet,
   Text,
   Image,
@@ -34,41 +35,6 @@ import guid from './guid'
 
 var STORAGE_KEY = '@Thumbaholic:user_id';
 class Main extends React.Component{
-  componentDidMount() {
-    this._loadInitialState().done();
-    var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
-    ws.onopen = () => {
-      navigator.geolocation.getCurrentPosition( position => {
-        let { latitude, longitude } = position.coords
-        console.log(position);
-        ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
-      });
-    }
-    ws.onmessage = (e) => {
-      // a message was received
-      navigator.geolocation.getCurrentPosition(position => {
-        let { latitude, longitude } = position.coords
-        console.log(latitude);
-        console.log(longitude);
-        ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
-      });
-    };
-  }
-  async _loadInitialState() {
-    try {
-      var id = await AsyncStorage.getItem(STORAGE_KEY);
-      if (id !== null){
-        this.setState({ id });
-      } else {
-        id = guid()
-        await AsyncStorage.setItem(STORAGE_KEY, id);
-        this.setState({ id });
-      }
-    } catch (error) {
-      console.log(error);
-
-    }
-  }
   navFirstAid() {
     this.props.navigator.push({
       id: 'first_aid_page'
@@ -163,7 +129,120 @@ class Main extends React.Component{
   }
 }
 
+var navOptions = {
+  enableHighAccuracy: true
+}
 class thumbaholic extends React.Component {
+  componentWillMount() {
+    console.log('component will mount');
+  }
+  componentDidMount() {
+    console.log('hit this');
+    this._loadInitialState().done();
+    this.ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+    this.ws.onopen = () => {
+      console.log('web socket open');
+      navigator.geolocation.getCurrentPosition( position => {
+        console.log('position found');
+        console.log(position);
+        let { latitude, longitude } = position.coords
+        console.log(position);
+        this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+      }, err => {
+        console.error(err)
+      }, navOptions);
+     this.watchID = navigator.geolocation.watchPosition((position) => {
+          let { latitude, longitude } = position.coords
+          console.log('sending in watch');
+          this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+      }, err => {
+        console.error(err)
+      }, navOptions);
+    }
+   this.ws.onerror = (e) => {
+     console.log(e);
+     console.log('error');
+   }
+    this.ws.onmessage = (e) => {
+      // a message was received
+      console.log('message received');
+      navigator.geolocation.getCurrentPosition(position => {
+        let { latitude, longitude } = position.coords
+        console.log(latitude);
+        console.log(longitude);
+        this.ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
+      }, err => {
+        console.error(err)
+      }, navOptions);
+    };
+    console.log('AppState');
+    // AppState.addEventListener('change', this.handleAppStateChange);
+  }
+  handleAppStateChange = (currentAppState) => {
+    console.log(currentAppState);
+    if (currentAppState == 'background' || currentAppState == 'inactive') {
+      navigator.geolocation.clearWatch(this.watchID);
+      this.ws.close()
+      this.setState({ currentAppState: currentAppState })
+    } else {
+      this.ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+      this.ws.onopen = () => {
+        console.log('web socket open');
+        navigator.geolocation.getCurrentPosition( position => {
+          console.log('position found');
+          console.log(position);
+          let { latitude, longitude } = position.coords
+          console.log(position);
+          this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+        });
+       this.watchID = navigator.geolocation.watchPosition((position) => {
+            let { latitude, longitude } = position.coords
+            this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+        });
+      }
+     this.ws.onerror = (e) => {
+       console.log(e);
+       console.log('error');
+     }
+      this.ws.onmessage = (e) => {
+        // a message was received
+        console.log('message received');
+        navigator.geolocation.getCurrentPosition(position => {
+          let { latitude, longitude } = position.coords
+          console.log(latitude);
+          console.log(longitude);
+          this.ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
+        });
+      };
+      this.setState({ currentAppState: currentAppState })
+    }
+  }
+  componentWillUnMount = () => {
+    console.log('unmount');
+    this.ws.close()
+    navigator.geolocation.clearWatch(this.watchID);
+  }
+
+  async _loadInitialState() {
+    try {
+      var id = await AsyncStorage.getItem(STORAGE_KEY);
+      if (id !== null){
+        this.setState({ id });
+      } else {
+        id = guid()
+        await AsyncStorage.setItem(STORAGE_KEY, id);
+        this.setState({ id });
+      }
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+  constructor(props) {
+    super(props);
+    console.log(AppState.currentState);
+    this.state = {currentAppState: AppState.currentState}
+  }
   render () {
     return (
     <Navigator style={styles.container} initialRoute={{id: 'main'}} renderScene={this.navigatorRenderScene} />
