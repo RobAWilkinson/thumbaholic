@@ -137,6 +137,8 @@ class Main extends React.Component{
             </View>
           </TouchableHighlight>
 
+
+
           <TouchableHighlight onPress={this.navFood.bind(this)}>
             <View>
               <FitImage

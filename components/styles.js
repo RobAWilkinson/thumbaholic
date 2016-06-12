@@ -63,6 +63,15 @@ const styles = StyleSheet.create({
   },
   goback: {
     width: 100
+  },
+  slide: {
+    position: 'absolute',
+    width: 325,
+    marginLeft: 25,
+    marginRight: 25,
+    // height: 1,
+    top: 525,
+    // left: 0,
   }
 })
 export default styles
