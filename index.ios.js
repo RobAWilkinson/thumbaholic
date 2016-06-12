@@ -29,11 +29,70 @@ import {
   Navigator,
   TouchableHighlight,
   AsyncStorage,
-  ScrollView
+  ScrollView,
+  DeviceEventEmitter
 } from 'react-native'
+
 import guid from './guid'
 
+// user_id 
 var STORAGE_KEY = '@Thumbaholic:user_id';
+
+var { RNLocation: Location } = require('NativeModules');
+
+// options for location updating
+Location.requestAlwaysAuthorization();
+Location.startUpdatingLocation();
+Location.setDistanceFilter(5.0);
+
+
+// create/ load an id
+async function  _loadInitialState () {
+  try {
+    var id = await AsyncStorage.getItem(STORAGE_KEY);
+    if (id !== null){
+      return id
+    } else {
+      id = guid()
+      await AsyncStorage.setItem(STORAGE_KEY, id);
+      return id
+    }
+  } catch (error) {
+    console.log(error);
+
+  }
+}
+
+var id = _loadInitialState().done()
+
+// create the websocket
+var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+var sub;
+ws.onopen = () => {
+  // when its open,  listen for all location changes and push them with the users id
+  //
+  sub = DeviceEventEmitter.addListener('locationUpdated', (position) => {
+    console.log('sending position');
+    let { latitude, longitude } = position.coords
+    ws.send(JSON.stringify({id: id, latitude, longitude }))
+  })
+}
+ws.onerror = (e) => {
+  console.error(e);
+  console.error('error');
+}
+
+ws.onmessage = (e) => {
+  // a message was received
+  // send location immediately
+  navigator.geolocation.getCurrentPosition(position => {
+    let { latitude, longitude } = position.coords
+    console.log(latitude);
+    console.log(longitude);
+    this.ws.send(JSON.stringify({ id: id, latitude, longitude }))
+  });
+};
+
 class Main extends React.Component{
   navFirstAid() {
     this.props.navigator.push({
@@ -133,115 +192,13 @@ var navOptions = {
   enableHighAccuracy: true
 }
 class thumbaholic extends React.Component {
-  componentWillMount() {
-    console.log('component will mount');
-  }
-  componentDidMount() {
-    console.log('hit this');
-    this._loadInitialState().done();
-    this.ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
-    this.ws.onopen = () => {
-      console.log('web socket open');
-      navigator.geolocation.getCurrentPosition( position => {
-        console.log('position found');
-        console.log(position);
-        let { latitude, longitude } = position.coords
-        console.log(position);
-        this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
-      }, err => {
-        console.error(err)
-      }, navOptions);
-     this.watchID = navigator.geolocation.watchPosition((position) => {
-          let { latitude, longitude } = position.coords
-          console.log('sending in watch');
-          this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
-      }, err => {
-        console.error(err)
-      }, navOptions);
-    }
-   this.ws.onerror = (e) => {
-     console.log(e);
-     console.log('error');
-   }
-    this.ws.onmessage = (e) => {
-      // a message was received
-      console.log('message received');
-      navigator.geolocation.getCurrentPosition(position => {
-        let { latitude, longitude } = position.coords
-        console.log(latitude);
-        console.log(longitude);
-        this.ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
-      }, err => {
-        console.error(err)
-      }, navOptions);
-    };
-    console.log('AppState');
-    // AppState.addEventListener('change', this.handleAppStateChange);
-  }
-  handleAppStateChange = (currentAppState) => {
-    console.log(currentAppState);
-    if (currentAppState == 'background' || currentAppState == 'inactive') {
-      navigator.geolocation.clearWatch(this.watchID);
-      this.ws.close()
-      this.setState({ currentAppState: currentAppState })
-    } else {
-      this.ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
-      this.ws.onopen = () => {
-        console.log('web socket open');
-        navigator.geolocation.getCurrentPosition( position => {
-          console.log('position found');
-          console.log(position);
-          let { latitude, longitude } = position.coords
-          console.log(position);
-          this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
-        });
-       this.watchID = navigator.geolocation.watchPosition((position) => {
-            let { latitude, longitude } = position.coords
-            this.ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
-        });
-      }
-     this.ws.onerror = (e) => {
-       console.log(e);
-       console.log('error');
-     }
-      this.ws.onmessage = (e) => {
-        // a message was received
-        console.log('message received');
-        navigator.geolocation.getCurrentPosition(position => {
-          let { latitude, longitude } = position.coords
-          console.log(latitude);
-          console.log(longitude);
-          this.ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
-        });
-      };
-      this.setState({ currentAppState: currentAppState })
-    }
-  }
   componentWillUnMount = () => {
     console.log('unmount');
-    this.ws.close()
-    navigator.geolocation.clearWatch(this.watchID);
-  }
-
-  async _loadInitialState() {
-    try {
-      var id = await AsyncStorage.getItem(STORAGE_KEY);
-      if (id !== null){
-        this.setState({ id });
-      } else {
-        id = guid()
-        await AsyncStorage.setItem(STORAGE_KEY, id);
-        this.setState({ id });
-      }
-    } catch (error) {
-      console.log(error);
-
-    }
+    sub.remove()
+    ws.close()
   }
   constructor(props) {
     super(props);
-    console.log(AppState.currentState);
-    this.state = {currentAppState: AppState.currentState}
   }
   render () {
     return (
