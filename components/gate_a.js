@@ -10,7 +10,7 @@ export default class Basspod extends React.Component {
   }
   navMain () {
     this.props.navigator.pop({
-      id: 'stages_page'
+      id: 'transportation_page'
     })
   }
   render () {
@@ -21,7 +21,7 @@ export default class Basspod extends React.Component {
           <ScrollView>
           <View>
             <FitImage 
-              source={{uri: 'http://aback-ladybug.surge.sh/one_full.jpg'}}/>
+              source={{uri: 'http://madly-quilt.surge.sh/gate_one_full.jpg'}}/>
           </View>
           </ScrollView>
 
@@ -44,7 +44,7 @@ export default class Basspod extends React.Component {
         <ScrollView>
           <View>
             <FitImage 
-              source={{uri: 'http://aback-ladybug.surge.sh/two_full.jpg'}}/>
+              source={{uri: 'http://madly-quilt.surge.sh/gate_two_full.jpg'}}/>
           </View>
         </ScrollView>
 
@@ -67,7 +67,7 @@ export default class Basspod extends React.Component {
           <ScrollView>
             <View>
               <FitImage 
-                source={{uri: 'http://aback-ladybug.surge.sh/three_full.jpg'}}/>
+                source={{uri: 'http://madly-quilt.surge.sh/gate_three_full.jpg'}}/>
             </View>
           </ScrollView>
 
@@ -89,7 +89,7 @@ export default class Basspod extends React.Component {
         <ScrollView>
           <View>
             <FitImage
-              source={{uri: 'http://aback-ladybug.surge.sh/stage_placeholder.jpg'}}/>
+              source={{uri: 'http://madly-quilt.surge.sh/gate_placeholder.jpg'}}/>
           </View>
         </ScrollView>
 
@@ -104,7 +104,7 @@ export default class Basspod extends React.Component {
     )
   }
   componentDidMount() {
-    fetch('https://thumbaholic.herokuapp.com/stages/1')
+    fetch('https://thumbaholic.herokuapp.com/gates/1')
      .then(resp => resp.json())
      .then(data => {
        console.log(data);

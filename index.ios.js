@@ -18,6 +18,10 @@ import NeonGarden from './components/neon_garden'
 import CosmicMeadow from './components/cosmic_meadow'
 import KineticField from './components/kinetic_field'
 import Wasteland from './components/wasteland'
+import GateA from './components/gate_a'
+import GateB from './components/gate_b'
+import GateC from './components/gate_c'
+import GateD from './components/gate_d'
 import styles from './components/styles'
 import {
   AppRegistry,
@@ -128,18 +132,12 @@ class Main extends React.Component{
     return (
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.logo_container}>
-            <FitImage
-              style={styles.logo}
-              source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/>
-            </View>
-
 
           <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
             <View>
               <FitImage
                 style={styles.first_aid}
-                source={{uri: 'http://finicky-fruit.surge.sh/first_aid.jpg'}}/>
+                source={{uri: 'http://broad-uncle.surge.sh/first_aid.jpg'}}/>
             </View>
           </TouchableHighlight>
 
@@ -179,10 +177,16 @@ class Main extends React.Component{
             <View>
               <FitImage
                 style={styles.transportation}
-                source={{uri: 'http://finicky-fruit.surge.sh/transpo.jpg'}}/>
+                source={{uri: 'http://fine-children.surge.sh/transpo.jpg'}}/>
             </View>
           </TouchableHighlight>
+
         </ScrollView>
+            <View style={styles.logo_container}>
+              <FitImage
+                style={styles.logo}
+                source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/>
+            </View>
       </View>
     )
   }
@@ -235,6 +239,14 @@ class thumbaholic extends React.Component {
         return (<KineticField navigator={navigator} title="kinetic_field" />)
       case 'wasteland':
         return (<Wasteland navigator={navigator} title="wasteland" />)
+      case 'gate_a':
+        return (<GateA navigator={navigator} title="gate_a" />)
+      case 'gate_b':
+        return (<GateB navigator={navigator} title="gate_b" />)
+      case 'gate_c':
+        return (<GateC navigator={navigator} title="gate_c" />)
+      case 'gate_d':
+        return (<GateD navigator={navigator} title="gate_d" />)
     }
   }
 }

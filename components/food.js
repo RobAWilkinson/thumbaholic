@@ -12,14 +12,21 @@ export default class Food extends React.Component {
   render () {
     return (
     <View style={styles.container}>
+      <ScrollView>
+        <View>
+          <Text style={styles.second_page}>
+            Food & Drinks
+          </Text>
+        </View>
+      </ScrollView>
+
       <TouchableHighlight onPress={this.navMain.bind(this)}>
         <View style={styles.goback_container}>
-          <FitImage style={styles.goback} source={{uri: 'http://unruly-process.surge.sh/go_back.png'}} />
+          <FitImage 
+            style={styles.goback} 
+            source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
         </View>
       </TouchableHighlight>
-      <Text style={styles.second_page}>
-        Food & Drinks
-      </Text>
     </View>
     )
   }
