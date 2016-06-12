@@ -14,9 +14,14 @@ export default class Water extends React.Component {
     <View style={styles.container}>
       <ScrollView>
         <View>
-          <Text style={styles.second_page}>
-            Free Water
-          </Text>
+          <FitImage
+            style={styles.entrance_background}
+            source={{uri: 'http://bloody-toothbrush.surge.sh/entrance_background.jpg'}}/>
+        </View>
+
+        <View>
+          <FitImage
+            source={{uri: 'http://decorous-airplane.surge.sh/water_station_placeholder.png'}}/>
         </View>
       </ScrollView>
 

@@ -14,9 +14,14 @@ export default class FirstAid extends React.Component {
     <View style={styles.container}>
       <ScrollView>
         <View>
-          <Text style={styles.second_page}>
-            First Aid
-          </Text>
+          <FitImage
+            style={styles.entrance_background}
+            source={{uri: 'http://bloody-toothbrush.surge.sh/entrance_background.jpg'}}/>
+        </View>
+
+        <View>
+          <FitImage
+            source={{uri: 'http://mute-truck.surge.sh/first_aid_placeholder.png'}}/>
         </View>
       </ScrollView>
 

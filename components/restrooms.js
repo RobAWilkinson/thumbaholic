@@ -21,9 +21,14 @@ export default class Restrooms extends React.Component {
     <View style={styles.container}>
       <ScrollView>
         <View>
-          <Text style={styles.second_page}>
-            Restrooms
-          </Text>
+          <FitImage
+            style={styles.entrance_background}
+            source={{uri: 'http://bloody-toothbrush.surge.sh/entrance_background.jpg'}}/>
+        </View>
+
+        <View>
+          <FitImage
+            source={{uri: 'http://mute-truck.surge.sh/restrooms_placeholder.png'}}/>
         </View>
       </ScrollView>
 
