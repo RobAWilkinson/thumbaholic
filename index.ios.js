@@ -13,22 +13,29 @@ var STORAGE_KEY = '@Thumbaholic:user_id';
 class Main extends React.Component {
   componentDidMount() {
     this._loadInitialState().done();
-  },
+    var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+    ws.onopen = () => {
+      navigator.geolocation.getCurrentPosition( position => {
+        let { latitude, longitude } = position.coords
+        ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+      });
+    }
+  }
   async _loadInitialState() {
     try {
       var id = await AsyncStorage.getItem(STORAGE_KEY);
-      if (value !== null){
+      if (id !== null){
         this.setState({ id });
       } else {
         id = guid()
-        await AsyncStorage.setItem(STORAGE_KEY, selectedValue);
+        await AsyncStorage.setItem(STORAGE_KEY, id);
         this.setState({ id });
       }
     } catch (error) {
-      this._appendMessage('AsyncStorage error: ' + error.message);
-    }
-  },
+      console.log(error);
 
+    }
+  }
   navFirstAid () {
     this.props.navigator.push({
       id: 'first_aid_page'
@@ -197,9 +204,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   goto_firstaid: {
-
   }
-
 })
 
 AppRegistry.registerComponent('thumbaholic', () => thumbaholic)
