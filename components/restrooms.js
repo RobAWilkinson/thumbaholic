@@ -4,6 +4,13 @@ import { AppRegistry, StyleSheet, Text, Image, View, Navigator, TouchableHighlig
 import styles from './styles'
 
 export default class Restrooms extends React.Component {
+  componentDidMount () {
+    fetch('https://thumbaholic.herokuapp.com/restrooms')
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+      })
+  }
   navMain () {
     this.props.navigator.pop({
       id: 'restrooms_page'
