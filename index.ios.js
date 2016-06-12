@@ -49,15 +49,14 @@ class Main extends React.Component{
             <FitImage 
               style={styles.logo}
               source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/> 
-
             </View>
           
 
           <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
             <View>
               <FitImage
-                style={styles.fird_aid}
-                source={{uri: 'http://pink-vessel.surge.sh/first_aid.jpg'}}/>
+                style={styles.first_aid}
+                source={{uri: 'http://finicky-fruit.surge.sh/first_aid.jpg'}}/>
             </View>
           </TouchableHighlight>
 
@@ -73,7 +72,7 @@ class Main extends React.Component{
             <View>
               <FitImage
                 style={styles.restrooms}
-                source={{uri: 'http://materialistic-sugar.surge.sh/restrooms.jpg'}}/>
+                source={{uri: 'http://finicky-fruit.surge.sh/restrooms.jpg'}}/>
             </View>
           </TouchableHighlight>
 
@@ -81,7 +80,7 @@ class Main extends React.Component{
             <View>
               <FitImage
                 style={styles.stages}
-                source={{uri: 'http://materialistic-sugar.surge.sh/stages.jpg'}}/>
+                source={{uri: 'http://nutty-room.surge.sh/stages.jpg'}}/>
             </View>
           </TouchableHighlight>
 
@@ -89,7 +88,7 @@ class Main extends React.Component{
             <View>
               <FitImage
                 style={styles.water}
-                source={{uri: 'http://materialistic-sugar.surge.sh/water.jpg'}}/>
+                source={{uri: 'http://jealous-form.surge.sh/water.jpg'}}/>
             </View>
           </TouchableHighlight>
 
@@ -97,7 +96,7 @@ class Main extends React.Component{
             <View>
               <FitImage
                 style={styles.transportation}
-                source={{uri: 'http://materialistic-sugar.surge.sh/transpo.jpg'}}/>
+                source={{uri: 'http://finicky-fruit.surge.sh/transpo.jpg'}}/>
             </View>
           </TouchableHighlight>
         </ScrollView>
@@ -111,20 +110,23 @@ class FirstAid extends React.Component{
     this.props.navigator.pop({
       id: 'first_aid_page'
     })
-      console.log("clicked again!")
   }
   render() {
     return (
       <View style={styles.container}>
+
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage
+              style={styles.goback}
+              source={{uri: 'http://unruly-process.surge.sh/go_back.png'}}/>
+          </View>
+        </TouchableHighlight>
+
         <Text style={styles.second_page}>
           First Aid
         </Text>
 
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <Text style={styles.button}>
-             Go back to page one!
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
@@ -139,15 +141,19 @@ class Food extends React.Component{
   render() {
     return (
       <View style={styles.container}>
+        
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage
+              style={styles.goback}
+              source={{uri: 'http://unruly-process.surge.sh/go_back.png'}}/>
+          </View>
+        </TouchableHighlight>
+
         <Text style={styles.second_page}>
           Food & Drinks
         </Text>
 
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <Text style={styles.button}>
-             Go back to page one!
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
@@ -162,15 +168,19 @@ class Restrooms extends React.Component{
   render() {
     return (
       <View style={styles.container}>
+       
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage
+              style={styles.goback}
+              source={{uri: 'http://unruly-process.surge.sh/go_back.png'}}/>
+          </View>
+        </TouchableHighlight>
+
         <Text style={styles.second_page}>
           Restrooms
         </Text>
 
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <Text style={styles.button}>
-             Go back to page one!
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
@@ -185,15 +195,19 @@ class Stages extends React.Component{
   render() {
     return (
       <View style={styles.container}>
+        
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage
+              style={styles.goback}
+              source={{uri: 'http://unruly-process.surge.sh/go_back.png'}}/>
+          </View>
+        </TouchableHighlight>
+
         <Text style={styles.second_page}>
           Stages
         </Text>
 
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <Text style={styles.button}>
-             Go back to page one!
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
@@ -208,15 +222,19 @@ class Water extends React.Component{
   render() {
     return (
       <View style={styles.container}>
+        
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage
+              style={styles.goback}
+              source={{uri: 'http://unruly-process.surge.sh/go_back.png'}}/>
+          </View>
+        </TouchableHighlight>
+
         <Text style={styles.second_page}>
           Free Water
         </Text>
 
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <Text style={styles.button}>
-             Go back to page one!
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
@@ -231,15 +249,19 @@ class Transportation extends React.Component{
   render() {
     return (
       <View style={styles.container}>
+        
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage
+              style={styles.goback}
+              source={{uri: 'http://unruly-process.surge.sh/go_back.png'}}/>
+          </View>
+        </TouchableHighlight>
+        
         <Text style={styles.second_page}>
           Transportation
         </Text>
 
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <Text style={styles.button}>
-             Go back to page one!
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
@@ -309,8 +331,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10
   },
-  goto_firstaid: {
-
+  goback_container: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  goback: {
+    // width: 300
   }
 
 })
