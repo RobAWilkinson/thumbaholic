@@ -51,51 +51,48 @@ Location.setDistanceFilter(5.0);
 
 
 // create/ load an id
-async function  _loadInitialState () {
-  try {
-    var id = await AsyncStorage.getItem(STORAGE_KEY);
-    if (id !== null){
-      return id
-    } else {
-      id = guid()
-      await AsyncStorage.setItem(STORAGE_KEY, id);
-      return id
-    }
-  } catch (error) {
-    console.log(error);
-
+AsyncStorage.getItem(STORAGE_KEY).then( id => {
+  console.log(id);
+  console.log('id in async is', id);
+  if (id !== null){
+    return  id
+  } else {
+    id = guid()
+    console.log('id in function call', id);
+      return AsyncStorage.setItem(STORAGE_KEY, id);
   }
-}
+}).then(id => {
+  console.log('user id is', id);
 
-var id = _loadInitialState().done()
+  // create the websocket
+  var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+  var sub;
+  ws.onopen = () => {
+    // when its open,  listen for all location changes and push them with the users id
+    //
+    sub = DeviceEventEmitter.addListener('locationUpdated', (position) => {
+      console.log('sending position');
+      let { latitude, longitude } = position.coords
+      console.log('user id is', id);
+      ws.send(JSON.stringify({id: id, latitude, longitude }))
+    })
+  }
+  ws.onerror = (e) => {
+    console.error(e);
+    console.error('error');
+  }
+})
 
-// create the websocket
-var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
-var sub;
-ws.onopen = () => {
-  // when its open,  listen for all location changes and push them with the users id
-  //
-  sub = DeviceEventEmitter.addListener('locationUpdated', (position) => {
-    console.log('sending position');
-    let { latitude, longitude } = position.coords
-    ws.send(JSON.stringify({id: id, latitude, longitude }))
-  })
-}
-ws.onerror = (e) => {
-  console.error(e);
-  console.error('error');
-}
-
-ws.onmessage = (e) => {
-  // a message was received
-  // send location immediately
-  navigator.geolocation.getCurrentPosition(position => {
-    let { latitude, longitude } = position.coords
-    console.log(latitude);
-    console.log(longitude);
-    this.ws.send(JSON.stringify({ id: id, latitude, longitude }))
-  });
-};
+// ws.onmessage = (e) => {
+//   // a message was received
+//   // send location immediately
+//   navigator.geolocation.getCurrentPosition(position => {
+//     let { latitude, longitude } = position.coords
+//     console.log(latitude);
+//     console.log(longitude);
+//     this.ws.send(JSON.stringify({ id: id, latitude, longitude }))
+//   });
+// };
 
 class Main extends React.Component{
   navFirstAid() {
