@@ -4,7 +4,7 @@ import { AppRegistry, StyleSheet, Text, Image, View, Navigator, TouchableHighlig
 import styles from './styles'
 
 export default class CosmicMeadow extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {}
   }
@@ -14,101 +14,81 @@ export default class CosmicMeadow extends React.Component {
     })
   }
   render () {
-    if(this.state.value == "1") {
-      return(
-        <View style={styles.container}>
-      
-          <ScrollView>
-          <View>
-            <FitImage 
-              source={{uri: 'http://aback-ladybug.surge.sh/one_full.jpg'}}/>
-          </View>
-          </ScrollView>
-
-          <TouchableHighlight onPress={this.navMain.bind(this)}>
-            <View style={styles.goback_container}>
-              <FitImage 
-                style={styles.goback} 
-                source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-            </View>
-          </TouchableHighlight>
-
-        </View>
-      );
-    } 
-
-    if(this.state.value == "2") {
-      return(
-        <View style={styles.container}>
-
-        <ScrollView>
-          <View>
-            <FitImage 
-              source={{uri: 'http://aback-ladybug.surge.sh/two_full.jpg'}}/>
-          </View>
-        </ScrollView>
-
-          <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <View style={styles.goback_container}>
-            <FitImage 
-              style={styles.goback} 
-              source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-          </View>
-        </TouchableHighlight>
-
-        </View>
-      );
-    } 
-
-    if(this.state.value == "3") {
-      return(
-        <View style={styles.container}>
-
-          <ScrollView>
-            <View>
-              <FitImage 
-                source={{uri: 'http://aback-ladybug.surge.sh/three_full.jpg'}}/>
-            </View>
-          </ScrollView>
-
-          <TouchableHighlight onPress={this.navMain.bind(this)}>
-            <View style={styles.goback_container}>
-              <FitImage 
-                style={styles.goback} 
-                source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-            </View>
-          </TouchableHighlight>
-
-        </View>
-      );
-    } 
-
-    return(
-
+    if (this.state.value == '1') {
+      return (
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <FitImage
-              source={{uri: 'http://aback-ladybug.surge.sh/stage_placeholder.jpg'}}/>
+            <FitImage source={{uri: 'http://aback-ladybug.surge.sh/one_full.jpg'}} />
           </View>
         </ScrollView>
-
         <TouchableHighlight onPress={this.navMain.bind(this)}>
-            <View style={styles.goback_container}>
-              <FitImage 
-                style={styles.goback} 
-                source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-            </View>
-          </TouchableHighlight>
+          <View style={styles.goback_container}>
+            <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+          </View>
+        </TouchableHighlight>
       </View>
+      )
+    }
+
+    if (this.state.value == '2') {
+      return (
+      <View style={styles.container}>
+        <ScrollView>
+          <View>
+            <FitImage source={{uri: 'http://aback-ladybug.surge.sh/two_full.jpg'}} />
+          </View>
+        </ScrollView>
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+          </View>
+        </TouchableHighlight>
+      </View>
+      )
+    }
+
+    if (this.state.value == '3') {
+      return (
+      <View style={styles.container}>
+        <ScrollView>
+          <View>
+            <FitImage source={{uri: 'http://aback-ladybug.surge.sh/three_full.jpg'}} />
+          </View>
+        </ScrollView>
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+          </View>
+        </TouchableHighlight>
+      </View>
+      )
+    }
+
+    return (
+
+    <View style={styles.container}>
+      <ScrollView>
+        <View>
+          <FitImage source={{uri: 'http://aback-ladybug.surge.sh/stage_placeholder.jpg'}} />
+        </View>
+      </ScrollView>
+      <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <View style={styles.goback_container}>
+          <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+        </View>
+      </TouchableHighlight>
+    </View>
     )
   }
-  componentDidMount() {
+  componentDidMount () {
     fetch('https://thumbaholic.herokuapp.com/stages/4')
-     .then(resp => resp.json())
-     .then(data => {
-       console.log(data)
-       this.setState({ value: data.value})
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ value: data.value})
+      }).catch(err => {
+      console.error(err)
     })
   }
 }
