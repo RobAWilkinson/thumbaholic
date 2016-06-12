@@ -41,7 +41,7 @@ export default class Transportation extends React.Component {
         <View>
           <FitImage
             style={styles.entrance_background}
-            source={{uri: 'http://chivalrous-visitor.surge.sh/entrance_background.jpg'}}/>
+            source={{uri: 'http://bloody-toothbrush.surge.sh/entrance_background.jpg'}}/>
         </View>
 
         <TouchableHighlight onPress={this.navGateA.bind(this)}>
