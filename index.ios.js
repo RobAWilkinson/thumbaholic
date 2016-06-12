@@ -52,14 +52,11 @@ Location.setDistanceFilter(5.0);
 
 // create/ load an id
 AsyncStorage.getItem(STORAGE_KEY).then( id => {
-  console.log(id);
-  console.log('id in async is', id);
   if (id !== null){
     return  id
   } else {
     id = guid()
-    console.log('id in function call', id);
-      return AsyncStorage.setItem(STORAGE_KEY, id);
+    return AsyncStorage.setItem(STORAGE_KEY, id);
   }
 }).then(id => {
   console.log('user id is', id);
@@ -67,7 +64,9 @@ AsyncStorage.getItem(STORAGE_KEY).then( id => {
   // create the websocket
   var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
   var sub;
+  console.log('creating websocket');
   ws.onopen = () => {
+    console.log('websocket open');
     // when its open,  listen for all location changes and push them with the users id
     //
     sub = DeviceEventEmitter.addListener('locationUpdated', (position) => {
