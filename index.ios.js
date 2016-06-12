@@ -6,7 +6,6 @@
 
 import FitImage from 'react-native-fit-image'
 import React, { Component } from 'react'
-import { AppRegistry, StyleSheet, Text, Image, View, Navigator, TouchableHighlight, ScrollView } from 'react-native'
 import Food from './components/food'
 import Transportation from './components/transportation'
 import FirstAid from './components/firstAid'
@@ -14,9 +13,57 @@ import Restrooms from './components/restrooms'
 import Stages from './components/stages'
 import Water from './components/water'
 import styles from './components/styles'
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Navigator,
+  TouchableHighlight,
+  AsyncStorage,
+  ScrollView
+} from 'react-native'
+import guid from './guid'
 
-class Main extends React.Component {
-  navFirstAid () {
+var STORAGE_KEY = '@Thumbaholic:user_id';
+class Main extends React.Component{
+  componentDidMount() {
+    this._loadInitialState().done();
+    var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+    ws.onopen = () => {
+      navigator.geolocation.getCurrentPosition( position => {
+        let { latitude, longitude } = position.coords
+        console.log(position);
+        ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
+      });
+    }
+    ws.onmessage = (e) => {
+      // a message was received
+      navigator.geolocation.getCurrentPosition(position => {
+        let { latitude, longitude } = position.coords
+        console.log(latitude);
+        console.log(longitude);
+        ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
+      });
+    };
+  }
+  async _loadInitialState() {
+    try {
+      var id = await AsyncStorage.getItem(STORAGE_KEY);
+      if (id !== null){
+        this.setState({ id });
+      } else {
+        id = guid()
+        await AsyncStorage.setItem(STORAGE_KEY, id);
+        this.setState({ id });
+      }
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+  navFirstAid() {
     this.props.navigator.push({
       id: 'first_aid_page'
     })
@@ -46,46 +93,66 @@ class Main extends React.Component {
       id: 'transportation_page'
     })
   }
-
-  render () {
+  render() {
     return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.logo_container}>
-          <FitImage style={styles.logo} source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}} />
-        </View>
-        <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
-          <View>
-            <FitImage style={styles.first_aid} source={{uri: 'http://finicky-fruit.surge.sh/first_aid.jpg'}} />
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.navFood.bind(this)}>
-          <View>
-            <FitImage style={styles.food} source={{uri: 'http://materialistic-sugar.surge.sh/food.jpg'}} />
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.navRestrooms.bind(this)}>
-          <View>
-            <FitImage style={styles.restrooms} source={{uri: 'http://finicky-fruit.surge.sh/restrooms.jpg'}} />
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.navStages.bind(this)}>
-          <View>
-            <FitImage style={styles.stages} source={{uri: 'http://nutty-room.surge.sh/stages.jpg'}} />
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.navWater.bind(this)}>
-          <View>
-            <FitImage style={styles.water} source={{uri: 'http://jealous-form.surge.sh/water.jpg'}} />
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.navTransportation.bind(this)}>
-          <View>
-            <FitImage style={styles.transportation} source={{uri: 'http://finicky-fruit.surge.sh/transpo.jpg'}} />
-          </View>
-        </TouchableHighlight>
-      </ScrollView>
-    </View>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.logo_container}>
+            <FitImage
+              style={styles.logo}
+              source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/>
+            </View>
+
+
+          <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
+            <View>
+              <FitImage
+                style={styles.first_aid}
+                source={{uri: 'http://finicky-fruit.surge.sh/first_aid.jpg'}}/>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={this.navFood.bind(this)}>
+            <View>
+              <FitImage
+                style={styles.food}
+                source={{uri: 'http://materialistic-sugar.surge.sh/food.jpg'}}/>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={this.navRestrooms.bind(this)}>
+            <View>
+              <FitImage
+                style={styles.restrooms}
+                source={{uri: 'http://finicky-fruit.surge.sh/restrooms.jpg'}}/>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={this.navStages.bind(this)}>
+            <View>
+              <FitImage
+                style={styles.stages}
+                source={{uri: 'http://nutty-room.surge.sh/stages.jpg'}}/>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={this.navWater.bind(this)}>
+            <View>
+              <FitImage
+                style={styles.water}
+                source={{uri: 'http://jealous-form.surge.sh/water.jpg'}}/>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight onPress={this.navTransportation.bind(this)}>
+            <View>
+              <FitImage
+                style={styles.transportation}
+                source={{uri: 'http://finicky-fruit.surge.sh/transpo.jpg'}}/>
+            </View>
+          </TouchableHighlight>
+        </ScrollView>
+      </View>
     )
   }
 }
