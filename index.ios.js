@@ -12,6 +12,12 @@ import FirstAid from './components/firstAid'
 import Restrooms from './components/restrooms'
 import Stages from './components/stages'
 import Water from './components/water'
+import Basspod from './components/basspod'
+import CircuitGrounds from './components/circuit_grounds'
+import NeonGarden from './components/neon_garden'
+import CosmicMeadow from './components/cosmic_meadow'
+import KineticField from './components/kinetic_field'
+import Wasteland from './components/wasteland'
 import styles from './components/styles'
 import {
   AppRegistry,
@@ -181,6 +187,18 @@ class thumbaholic extends React.Component {
         return (<Water navigator={navigator} title="water_page" />)
       case 'transportation_page':
         return (<Transportation navigator={navigator} title="transportation_page" />)
+      case 'basspod':
+        return (<Basspod navigator={navigator} title="basspod" />)
+      case 'circuit_grounds':
+        return (<CircuitGrounds navigator={navigator} title="circuit_grounds" />)
+      case 'neon_garden':
+        return (<NeonGarden navigator={navigator} title="neon_garden" />)
+      case 'cosmic_meadow':
+        return (<CosmicMeadow navigator={navigator} title="cosmic_meadow" />)
+      case 'kinetic_field':
+        return (<KineticField navigator={navigator} title="kinetic_field" />)
+      case 'wasteland':
+        return (<Wasteland navigator={navigator} title="wasteland" />)
     }
   }
 }
