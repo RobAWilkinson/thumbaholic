@@ -9,16 +9,71 @@ export default class Transportation extends React.Component {
       id: 'transportation_page'
     })
   }
+
+  navGateA () {
+    this.props.navigator.push({
+      id: 'gate_a'
+    })
+  }
+
+  navGateB () {
+    this.props.navigator.push({
+      id: 'gate_b'
+    })
+  }
+
+  navGateC () {
+    this.props.navigator.push({
+      id: 'gate_c'
+    })
+  }
+
+  navGateD () {
+    this.props.navigator.push({
+      id: 'gate_d'
+    })
+  }
+
   render () {
     return (
-    <View style={styles.container}>
+    <View style={styles.entrance_container}>
       <ScrollView>
         <View>
-          <Text style={styles.second_page}>
-            Entrance Gates
-          </Text>
+          <FitImage
+            style={styles.entrance_background}
+            source={{uri: 'http://chivalrous-visitor.surge.sh/entrance_background.jpg'}}/>
         </View>
+
+        <TouchableHighlight onPress={this.navGateA.bind(this)}>
+          <View>
+            <FitImage
+              source={{uri: 'http://wanting-journey.surge.sh/gate_a.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.navGateB.bind(this)}>
+          <View>
+            <FitImage
+              source={{uri: 'http://wanting-journey.surge.sh/gate_b.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.navGateC.bind(this)}>
+          <View>
+            <FitImage
+              source={{uri: 'http://wanting-journey.surge.sh/gate_c.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.navGateD.bind(this)}>
+          <View>
+            <FitImage
+              source={{uri: 'http://wanting-journey.surge.sh/gate_d.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
       </ScrollView>
+
 
       <TouchableHighlight onPress={this.navMain.bind(this)}>
         <View style={styles.goback_container}>
