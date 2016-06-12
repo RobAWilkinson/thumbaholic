@@ -20,6 +20,15 @@ class Main extends React.Component {
         ws.send(JSON.stringify({id: this.state.id, latitude, longitude }))
       });
     }
+    ws.onmessage = (e) => {
+      // a message was received
+      navigator.geolocation.getCurrentPosition(position => {
+        let { latitude, longitude } = position.coords
+        console.log(latitude);
+        console.log(longitude);
+        ws.send(JSON.stringify({ id: this.state.id, latitude, longitude }))
+      });
+    };
   }
   async _loadInitialState() {
     try {
