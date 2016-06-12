@@ -148,7 +148,7 @@ class Main extends React.Component{
             <View>
               <FitImage
                 style={styles.transportation}
-                source={{uri: 'http://finicky-fruit.surge.sh/transpo.jpg'}}/>
+                source={{uri: 'http://fine-children.surge.sh/transpo.jpg'}}/>
             </View>
           </TouchableHighlight>
 

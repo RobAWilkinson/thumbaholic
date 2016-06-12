@@ -21,7 +21,7 @@ export default class Basspod extends React.Component {
           <ScrollView>
           <View>
             <FitImage 
-              source={{uri: 'http://dramatic-station.surge.sh/one_full.jpg'}}/>
+              source={{uri: 'http://aback-ladybug.surge.sh/one_full.jpg'}}/>
           </View>
           </ScrollView>
 
@@ -44,7 +44,7 @@ export default class Basspod extends React.Component {
         <ScrollView>
           <View>
             <FitImage 
-              source={{uri: 'http://dramatic-station.surge.sh/two_full.jpg'}}/>
+              source={{uri: 'http://aback-ladybug.surge.sh/two_full.jpg'}}/>
           </View>
         </ScrollView>
 
@@ -67,7 +67,7 @@ export default class Basspod extends React.Component {
           <ScrollView>
             <View>
               <FitImage 
-                source={{uri: 'http://dramatic-station.surge.sh/three_full.jpg'}}/>
+                source={{uri: 'http://aback-ladybug.surge.sh/three_full.jpg'}}/>
             </View>
           </ScrollView>
 
@@ -89,7 +89,7 @@ export default class Basspod extends React.Component {
         <ScrollView>
           <View>
             <FitImage
-              source={{uri: 'http://anxious-map.surge.sh/stage_placeholder.jpg'}}/>
+              source={{uri: 'http://aback-ladybug.surge.sh/stage_placeholder.jpg'}}/>
           </View>
         </ScrollView>
 
@@ -101,9 +101,7 @@ export default class Basspod extends React.Component {
             </View>
           </TouchableHighlight>
       </View>
-      )
-
-
+    )
   }
   componentDidMount() {
     fetch('https://thumbaholic.herokuapp.com/stages/1')

@@ -15,7 +15,7 @@ export default class Transportation extends React.Component {
       <ScrollView>
         <View>
           <Text style={styles.second_page}>
-            Transportation
+            Entrance Gates
           </Text>
         </View>
       </ScrollView>

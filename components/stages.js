@@ -82,7 +82,7 @@ export default class Stages extends React.Component {
         <TouchableHighlight onPress={this.navKineticField.bind(this)}>
           <View>
             <FitImage
-              source={{uri: 'http://giddy-ring.surge.sh/kinetic_field.jpg'}}/>
+              source={{uri: 'http://separate-farmer.surge.sh/kinetic_field.jpg'}}/>
           </View>
         </TouchableHighlight>
 
