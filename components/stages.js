@@ -51,12 +51,6 @@ export default class Stages extends React.Component {
 
     <View style={styles.container}>
       <ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <View style={styles.goback_container}>
-            <FitImage style={styles.goback} source={{uri: 'http://unruly-process.surge.sh/go_back.png'}} />
-          </View>
-        </TouchableHighlight>
-        
         <TouchableHighlight onPress={this.navBasspod.bind(this)}>
           <View>
             <FitImage
@@ -98,7 +92,17 @@ export default class Stages extends React.Component {
               source={{uri: 'http://giddy-ring.surge.sh/wasteland.jpg'}}/>
           </View>
         </TouchableHighlight>
+
+
       </ScrollView>
+      
+      <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <View style={styles.goback_container}>
+          <FitImage 
+            style={styles.goback} 
+            source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+        </View>
+      </TouchableHighlight>
     </View>
 
     )

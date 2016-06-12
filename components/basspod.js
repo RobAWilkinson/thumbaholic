@@ -18,16 +18,20 @@ export default class Basspod extends React.Component {
       return(
         <View style={styles.container}>
       
-          <TouchableHighlight onPress={this.navMain.bind(this)}>
-            <View style={styles.goback_container}>
-              <FitImage style={styles.goback} source={{uri: 'http://unruly-process.surge.sh/go_back.png'}} />
-            </View>
-          </TouchableHighlight>
-
+          <ScrollView>
           <View>
             <FitImage 
               source={{uri: 'http://dramatic-station.surge.sh/one_full.jpg'}}/>
           </View>
+          </ScrollView>
+
+          <TouchableHighlight onPress={this.navMain.bind(this)}>
+            <View style={styles.goback_container}>
+              <FitImage 
+                style={styles.goback} 
+                source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+            </View>
+          </TouchableHighlight>
 
         </View>
       );
@@ -36,17 +40,21 @@ export default class Basspod extends React.Component {
     if(this.state.value == "2") {
       return(
         <View style={styles.container}>
-      
-          <TouchableHighlight onPress={this.navMain.bind(this)}>
-            <View style={styles.goback_container}>
-              <FitImage style={styles.goback} source={{uri: 'http://unruly-process.surge.sh/go_back.png'}} />
-            </View>
-          </TouchableHighlight>
 
+        <ScrollView>
           <View>
             <FitImage 
               source={{uri: 'http://dramatic-station.surge.sh/two_full.jpg'}}/>
           </View>
+        </ScrollView>
+
+          <TouchableHighlight onPress={this.navMain.bind(this)}>
+          <View style={styles.goback_container}>
+            <FitImage 
+              style={styles.goback} 
+              source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+          </View>
+        </TouchableHighlight>
 
         </View>
       );
@@ -55,17 +63,21 @@ export default class Basspod extends React.Component {
     if(this.state.value == "3") {
       return(
         <View style={styles.container}>
-      
+
+          <ScrollView>
+            <View>
+              <FitImage 
+                source={{uri: 'http://dramatic-station.surge.sh/three_full.jpg'}}/>
+            </View>
+          </ScrollView>
+
           <TouchableHighlight onPress={this.navMain.bind(this)}>
             <View style={styles.goback_container}>
-              <FitImage style={styles.goback} source={{uri: 'http://unruly-process.surge.sh/go_back.png'}} />
+              <FitImage 
+                style={styles.goback} 
+                source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
             </View>
           </TouchableHighlight>
-
-          <View>
-            <FitImage 
-              source={{uri: 'http://dramatic-station.surge.sh/three_full.jpg'}}/>
-          </View>
 
         </View>
       );
@@ -73,14 +85,21 @@ export default class Basspod extends React.Component {
 
     return(
 
-      <View>
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
-          <View style={styles.goback_container}>
-            <FitImage style={styles.goback} source={{uri: 'http://unruly-process.surge.sh/go_back.png'}} />
+      <View style={styles.container}>
+        <ScrollView>
+          <View>
+            <FitImage
+              source={{uri: 'http://anxious-map.surge.sh/stage_placeholder.jpg'}}/>
           </View>
-        </TouchableHighlight>
-        <FitImage
-          source={{uri: 'http://anxious-map.surge.sh/stage_placeholder.jpg'}}/>
+        </ScrollView>
+
+        <TouchableHighlight onPress={this.navMain.bind(this)}>
+            <View style={styles.goback_container}>
+              <FitImage 
+                style={styles.goback} 
+                source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
+            </View>
+          </TouchableHighlight>
       </View>
       )
 

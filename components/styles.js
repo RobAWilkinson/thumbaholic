@@ -2,13 +2,14 @@ import { AppRegistry, StyleSheet, Text, Image, View, Navigator, TouchableHighlig
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: 'white',
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    paddingTop: 20
+    paddingTop: 10
   },
   first_page: {
     fontSize: 20,
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   logo: {
-    width: 300
+    width: 300,
   },
   logo_container: {
     alignItems: 'center',
@@ -37,10 +38,11 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    alignItems: 'center',
   },
   goback: {
-    // width: 300
+    width: 100
   }
 })
 export default styles

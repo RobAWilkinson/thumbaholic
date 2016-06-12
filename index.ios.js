@@ -103,12 +103,6 @@ class Main extends React.Component{
     return (
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.logo_container}>
-            <FitImage
-              style={styles.logo}
-              source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/>
-            </View>
-
 
           <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
             <View>
@@ -157,7 +151,13 @@ class Main extends React.Component{
                 source={{uri: 'http://finicky-fruit.surge.sh/transpo.jpg'}}/>
             </View>
           </TouchableHighlight>
+
         </ScrollView>
+            <View style={styles.logo_container}>
+              <FitImage
+                style={styles.logo}
+                source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/>
+            </View>
       </View>
     )
   }
