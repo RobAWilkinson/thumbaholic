@@ -4,7 +4,7 @@
  * @flow
  */
 import React, { Component } from 'react'
-
+import Slider from 'react-native-slider'
 import FitImage from 'react-native-fit-image'
 import Food from './components/food'
 import Transportation from './components/transportation'
