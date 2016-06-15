@@ -47,12 +47,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10
   },
-  logo: {
-    width: 300,
-  },
   logo_container: {
-    alignItems: 'center',
-    padding: 10
+    flex: 1,
+  },
+  logo: {
+    flex:1,
+  },
+  flex: {
+    flex: 1,
   },
   goback_container: {
     paddingLeft: 20,
@@ -72,6 +74,23 @@ const styles = StyleSheet.create({
     // height: 1,
     top: 525,
     // left: 0,
+  },
+  locationBtn: {
+    height: 36,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   }
 })
 export default styles

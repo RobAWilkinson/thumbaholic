@@ -22,6 +22,7 @@ import GateA from './components/gate_a'
 import GateB from './components/gate_b'
 import GateC from './components/gate_c'
 import GateD from './components/gate_d'
+import Instructions from './components/instructions'
 import styles from './components/styles'
 import {
   AppRegistry,
@@ -34,53 +35,55 @@ import {
   TouchableHighlight,
   AsyncStorage,
   ScrollView,
+  locationPrompt,
   DeviceEventEmitter
 } from 'react-native'
 
 import guid from './guid'
 
 // user_id 
+
 var STORAGE_KEY = '@Thumbaholic:user_id';
 
 var { RNLocation: Location } = require('NativeModules');
 
-// options for location updating
+    // options for location updating
 Location.requestAlwaysAuthorization();
 Location.startUpdatingLocation();
 Location.setDistanceFilter(5.0);
 
-
-// create/ load an id
-AsyncStorage.getItem(STORAGE_KEY).then( id => {
-  if (id !== null){
-    return  id
-  } else {
-    id = guid()
-    return AsyncStorage.setItem(STORAGE_KEY, id);
-  }
-}).then(id => {
-  console.log('user id is', id);
-
-  // create the websocket
-  var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
-  var sub;
-  console.log('creating websocket');
-  ws.onopen = () => {
-    console.log('websocket open');
-    // when its open,  listen for all location changes and push them with the users id
-    //
-    sub = DeviceEventEmitter.addListener('locationUpdated', (position) => {
-      console.log('sending position');
-      let { latitude, longitude } = position.coords
+    // create/ load an id
+    AsyncStorage.getItem(STORAGE_KEY).then( id => {
+      if (id !== null){
+        return  id
+      } else {
+        id = guid()
+        return AsyncStorage.setItem(STORAGE_KEY, id);
+      }
+    }).then(id => {
       console.log('user id is', id);
-      ws.send(JSON.stringify({id: id, latitude, longitude }))
+
+      // create the websocket
+      var ws = new WebSocket('ws://thumbaholic.herokuapp.com/');
+      var sub;
+      console.log('creating websocket');
+      ws.onopen = () => {
+        console.log('websocket open');
+        // when its open,  listen for all location changes and push them with the users id
+        //
+        sub = DeviceEventEmitter.addListener('locationUpdated', (position) => {
+          console.log('sending position');
+          let { latitude, longitude } = position.coords
+          console.log('user id is', id);
+          ws.send(JSON.stringify({id: id, latitude, longitude }))
+        })
+      }
+      ws.onerror = (e) => {
+        console.error(e);
+        console.error('error');
+      }
     })
-  }
-  ws.onerror = (e) => {
-    console.error(e);
-    console.error('error');
-  }
-})
+
 
 // ws.onmessage = (e) => {
 //   // a message was received
@@ -94,6 +97,7 @@ AsyncStorage.getItem(STORAGE_KEY).then( id => {
 // };
 
 class Main extends React.Component{
+  
   navFirstAid() {
     this.props.navigator.push({
       id: 'first_aid_page'
@@ -127,64 +131,43 @@ class Main extends React.Component{
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
 
-          <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
-            <View>
-              <FitImage
-                style={styles.first_aid}
-                source={{uri: 'http://broad-uncle.surge.sh/first_aid.jpg'}}/>
-            </View>
-          </TouchableHighlight>
+        <TouchableHighlight onPress={this.navFirstAid.bind(this)} underlayColor="white">
+          <View style={styles.logo_container}>
+            <FitImage
+              style={styles.logo}
+              source={{uri: 'http://wooden-brush.surge.sh/edcwavves.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
+          <View>
+            <FitImage
+              style={styles.flex}
+              source={{uri: 'http://possible-brass.surge.sh/whats_hot.jpg'}}/>
+          </View>
+        </TouchableHighlight>
 
 
+        <TouchableHighlight onPress={this.navFood.bind(this)}>
+          <View>
+            <FitImage
+              style={styles.flex}
+              source={{uri: 'http://possible-brass.surge.sh/wait_times.jpg'}}/>
+          </View>
+        </TouchableHighlight>
 
-          <TouchableHighlight onPress={this.navFood.bind(this)}>
-            <View>
-              <FitImage
-                style={styles.food}
-                source={{uri: 'http://materialistic-sugar.surge.sh/food.jpg'}}/>
-            </View>
-          </TouchableHighlight>
 
-          <TouchableHighlight onPress={this.navRestrooms.bind(this)}>
-            <View>
-              <FitImage
-                style={styles.restrooms}
-                source={{uri: 'http://finicky-fruit.surge.sh/restrooms.jpg'}}/>
-            </View>
-          </TouchableHighlight>
+        <TouchableHighlight onPress={this.navRestrooms.bind(this)}>
+          <View>
+            <FitImage
+              style={styles.flex}
+              source={{uri: 'http://trashy-field.surge.sh/my_points.jpg'}}/>
+          </View>
+        </TouchableHighlight>
 
-          <TouchableHighlight onPress={this.navStages.bind(this)}>
-            <View>
-              <FitImage
-                style={styles.stages}
-                source={{uri: 'http://nutty-room.surge.sh/stages.jpg'}}/>
-            </View>
-          </TouchableHighlight>
 
-          <TouchableHighlight onPress={this.navWater.bind(this)}>
-            <View>
-              <FitImage
-                style={styles.water}
-                source={{uri: 'http://jealous-form.surge.sh/water.jpg'}}/>
-            </View>
-          </TouchableHighlight>
-
-          <TouchableHighlight onPress={this.navTransportation.bind(this)}>
-            <View>
-              <FitImage
-                style={styles.transportation}
-                source={{uri: 'http://fine-children.surge.sh/transpo.jpg'}}/>
-            </View>
-          </TouchableHighlight>
-
-        </ScrollView>
-            <View style={styles.logo_container}>
-              <FitImage
-                style={styles.logo}
-                source={{uri: 'http://defiant-nation.surge.sh/powered_by_thumbaholics.png'}}/>
-            </View>
+            
       </View>
     )
   }
@@ -245,6 +228,8 @@ class thumbaholic extends React.Component {
         return (<GateC navigator={navigator} title="gate_c" />)
       case 'gate_d':
         return (<GateD navigator={navigator} title="gate_d" />)
+      case 'instructions':
+        return (<Instructions navigator={navigator} title="instructions" />)
     }
   }
 }
