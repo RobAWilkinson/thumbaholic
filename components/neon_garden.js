@@ -38,7 +38,7 @@ export default class NeonGarden extends React.Component {
         </ScrollView>
 
         
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.goback_container}>
             <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
           </View>
@@ -68,7 +68,7 @@ export default class NeonGarden extends React.Component {
             thumbTintColor={'white'}/>
           </View>
         </ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.goback_container}>
             <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
           </View>
@@ -97,7 +97,7 @@ export default class NeonGarden extends React.Component {
             thumbTintColor={'white'}/>
           </View>
         </ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.goback_container}>
             <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
           </View>
@@ -126,7 +126,7 @@ export default class NeonGarden extends React.Component {
             thumbTintColor={'white'}/>
         </View>
       </ScrollView>
-      <TouchableHighlight onPress={this.navMain.bind(this)}>
+      <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
         <View style={styles.goback_container}>
           <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
         </View>

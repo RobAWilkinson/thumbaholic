@@ -18,6 +18,8 @@ export default class Basspod extends React.Component {
     if (this.state.value == '1') {
       return (
       <View style={styles.container}>
+      
+
         <ScrollView>
           <View>
             <FitImage source={{uri: 'http://tense-thunder.surge.sh/one_full.jpg'}} />
@@ -38,7 +40,7 @@ export default class Basspod extends React.Component {
         </ScrollView>
 
         
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.goback_container}>
             <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
           </View>
@@ -68,7 +70,7 @@ export default class Basspod extends React.Component {
             thumbTintColor={'white'}/>
           </View>
         </ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.goback_container}>
             <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
           </View>
@@ -97,7 +99,7 @@ export default class Basspod extends React.Component {
             thumbTintColor={'white'}/>
           </View>
         </ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.goback_container}>
             <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
           </View>
@@ -126,7 +128,7 @@ export default class Basspod extends React.Component {
             thumbTintColor={'white'}/>
         </View>
       </ScrollView>
-      <TouchableHighlight onPress={this.navMain.bind(this)}>
+      <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
         <View style={styles.goback_container}>
           <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
         </View>

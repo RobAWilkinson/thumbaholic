@@ -44,38 +44,46 @@ export default class Transportation extends React.Component {
             source={{uri: 'http://bloody-toothbrush.surge.sh/entrance_background.jpg'}}/>
         </View>
 
+        <TouchableHighlight underlayColor="white">
+          <View style={styles.logo_container}>
+            <FitImage
+              style={styles.logo}
+              source={{uri: 'http://wooden-brush.surge.sh/edcwavves.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
         <TouchableHighlight onPress={this.navGateA.bind(this)}>
           <View>
             <FitImage
-              source={{uri: 'http://wanting-journey.surge.sh/gate_a.jpg'}}/>
+              source={{uri: 'http://boiling-farmer.surge.sh/gate_a.jpg'}}/>
           </View>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.navGateB.bind(this)}>
           <View>
             <FitImage
-              source={{uri: 'http://wanting-journey.surge.sh/gate_b.jpg'}}/>
+              source={{uri: 'http://boiling-farmer.surge.sh/gate_b.jpg'}}/>
           </View>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.navGateC.bind(this)}>
           <View>
             <FitImage
-              source={{uri: 'http://wanting-journey.surge.sh/gate_c.jpg'}}/>
+              source={{uri: 'http://boiling-farmer.surge.sh/gate_c.jpg'}}/>
           </View>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.navGateD.bind(this)}>
           <View>
             <FitImage
-              source={{uri: 'http://wanting-journey.surge.sh/gate_d.jpg'}}/>
+              source={{uri: 'http://boiling-farmer.surge.sh/gate_d.jpg'}}/>
           </View>
         </TouchableHighlight>
 
       </ScrollView>
 
 
-      <TouchableHighlight onPress={this.navMain.bind(this)}>
+      <TouchableHighlight onPress={this.navMain.bind(this)}  underlayColor="white">
         <View style={styles.goback_container}>
           <FitImage 
             style={styles.goback} 

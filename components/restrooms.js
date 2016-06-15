@@ -32,7 +32,7 @@ export default class Restrooms extends React.Component {
         </View>
       </ScrollView>
 
-      <TouchableHighlight onPress={this.navMain.bind(this)}>
+      <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
         <View style={styles.goback_container}>
           <FitImage 
             style={styles.goback} 

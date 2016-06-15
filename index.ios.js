@@ -6,6 +6,8 @@
 import React, { Component } from 'react'
 import Slider from 'react-native-slider'
 import FitImage from 'react-native-fit-image'
+import Drawer from 'react-native-drawer'
+import SideMenu from 'react-native-side-menu'
 import Food from './components/food'
 import Transportation from './components/transportation'
 import FirstAid from './components/firstAid'
@@ -36,7 +38,9 @@ import {
   AsyncStorage,
   ScrollView,
   locationPrompt,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  ControlPanel,
+  MainView
 } from 'react-native'
 
 import guid from './guid'
@@ -96,8 +100,9 @@ Location.setDistanceFilter(5.0);
 //   });
 // };
 
+
 class Main extends React.Component{
-  
+
   navFirstAid() {
     this.props.navigator.push({
       id: 'first_aid_page'
@@ -130,6 +135,7 @@ class Main extends React.Component{
   }
   render() {
     return (
+      
       <View style={styles.container}>
 
         <TouchableHighlight onPress={this.navFirstAid.bind(this)} underlayColor="white">
@@ -140,7 +146,8 @@ class Main extends React.Component{
           </View>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={this.navFirstAid.bind(this)}>
+
+        <TouchableHighlight onPress={this.navStages.bind(this)}>
           <View>
             <FitImage
               style={styles.flex}
@@ -149,7 +156,7 @@ class Main extends React.Component{
         </TouchableHighlight>
 
 
-        <TouchableHighlight onPress={this.navFood.bind(this)}>
+        <TouchableHighlight onPress={this.navTransportation.bind(this)}>
           <View>
             <FitImage
               style={styles.flex}
@@ -166,17 +173,18 @@ class Main extends React.Component{
           </View>
         </TouchableHighlight>
 
-
-            
       </View>
     )
   }
 }
 
+
 var navOptions = {
   enableHighAccuracy: true
 }
+
 class thumbaholic extends React.Component {
+
   componentWillUnMount = () => {
     console.log('unmount');
     sub.remove()
