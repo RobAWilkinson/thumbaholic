@@ -18,6 +18,13 @@ export default class NeonGarden extends React.Component {
     if (this.state.value == '1') {
       return (
       <View style={styles.container}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+          <View style={styles.logo_container}>
+            <FitImage
+              style={styles.logo}
+              source={{uri: 'http://fantastic-surprise.surge.sh/back_btn.jpg'}}/>
+          </View>
+        </TouchableHighlight>
         <ScrollView>
           <View>
             <FitImage source={{uri: 'http://tense-thunder.surge.sh/one_full.jpg'}} />
@@ -34,15 +41,7 @@ export default class NeonGarden extends React.Component {
             }}
             thumbTintColor={'white'}/>
           </View>
-
         </ScrollView>
-
-        
-        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
-          <View style={styles.goback_container}>
-            <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-          </View>
-        </TouchableHighlight>
 
       </View>
       )
@@ -51,6 +50,13 @@ export default class NeonGarden extends React.Component {
     if (this.state.value == '2') {
       return (
       <View style={styles.container}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+          <View style={styles.logo_container}>
+            <FitImage
+              style={styles.logo}
+              source={{uri: 'http://fantastic-surprise.surge.sh/back_btn.jpg'}}/>
+          </View>
+        </TouchableHighlight>
         <ScrollView>
           <View>
             <FitImage source={{uri: 'http://tense-thunder.surge.sh/two_full.jpg'}} />
@@ -68,11 +74,6 @@ export default class NeonGarden extends React.Component {
             thumbTintColor={'white'}/>
           </View>
         </ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
-          <View style={styles.goback_container}>
-            <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-          </View>
-        </TouchableHighlight>
       </View>
       )
     }
@@ -80,6 +81,13 @@ export default class NeonGarden extends React.Component {
     if (this.state.value == '3') {
       return (
       <View style={styles.container}>
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+          <View style={styles.logo_container}>
+            <FitImage
+              style={styles.logo}
+              source={{uri: 'http://fantastic-surprise.surge.sh/back_btn.jpg'}}/>
+          </View>
+        </TouchableHighlight>
         <ScrollView>
           <View>
             <FitImage source={{uri: 'http://tense-thunder.surge.sh/three_full.jpg'}} />
@@ -97,11 +105,6 @@ export default class NeonGarden extends React.Component {
             thumbTintColor={'white'}/>
           </View>
         </ScrollView>
-        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
-          <View style={styles.goback_container}>
-            <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-          </View>
-        </TouchableHighlight>
       </View>
       )
     }
@@ -109,6 +112,13 @@ export default class NeonGarden extends React.Component {
     return (
 
     <View style={styles.container}>
+      <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+        <View style={styles.logo_container}>
+          <FitImage
+            style={styles.logo}
+            source={{uri: 'http://fantastic-surprise.surge.sh/back_btn.jpg'}}/>
+        </View>
+      </TouchableHighlight>
       <ScrollView>
         <View>
           <FitImage source={{uri: 'http://tense-thunder.surge.sh/stage_placeholder.jpg'}} />
@@ -126,11 +136,6 @@ export default class NeonGarden extends React.Component {
             thumbTintColor={'white'}/>
         </View>
       </ScrollView>
-      <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
-        <View style={styles.goback_container}>
-          <FitImage style={styles.goback} source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-        </View>
-      </TouchableHighlight>
     </View>
     )
   }

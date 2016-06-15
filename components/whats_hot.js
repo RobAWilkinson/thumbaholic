@@ -1,21 +1,29 @@
 import FitImage from 'react-native-fit-image'
+import Slider from 'react-native-slider'
 import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, Image, View, Navigator, TouchableHighlight, ScrollView } from 'react-native'
 import styles from './styles'
 
-export default class Stages extends React.Component {
+export default class WhatsHot extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {tracker: 0}
+  }
   navMain () {
     this.props.navigator.pop({
-      id: 'stages_page'
+      id: 'main'
     })
   }
-
+  navRateNeon () {
+    this.props.navigator.push({
+      id: 'rate_neon'
+    })
+  }
   navBasspod () {
     this.props.navigator.push({
       id: 'basspod'
     })
   }
-
   navCircuitGrounds () {
     this.props.navigator.push({
       id: 'circuit_grounds'
@@ -45,13 +53,11 @@ export default class Stages extends React.Component {
       id: 'wasteland'
     })
   }
-
   render () {
-    return (
+      return (
+      <View style={styles.container}>
 
-    <View style={styles.container}>
-
-    <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+        <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
           <View style={styles.logo_container}>
             <FitImage
               style={styles.logo}
@@ -60,52 +66,41 @@ export default class Stages extends React.Component {
         </TouchableHighlight>
 
 
+        <TouchableHighlight onPress={this.navRateNeon.bind(this)}>
+          <View>
+            <FitImage source={{uri: 'http://exciting-father.surge.sh/neon_1.jpg'}} />
+          </View>
+        </TouchableHighlight>
 
         <TouchableHighlight onPress={this.navBasspod.bind(this)}>
           <View>
-            <FitImage
-              source={{uri: 'http://exciting-father.surge.sh/basspod_1.jpg'}}/>
+            <FitImage source={{uri: 'http://exciting-father.surge.sh/basspod_1.jpg'}} />
           </View>
         </TouchableHighlight>
+
 
         <TouchableHighlight onPress={this.navCircuitGrounds.bind(this)}>
           <View>
-            <FitImage
-              source={{uri: 'http://exciting-father.surge.sh/circuit_1.jpg'}}/>
-          </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={this.navNeonGarden.bind(this)}>
-          <View>
-            <FitImage
-              source={{uri: 'http://dng-com.s3.amazonaws.com/download/wavves/neon_garden.jpg'}}/>
-          </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={this.navCosmicMeadow.bind(this)}>
-          <View>
-            <FitImage
-              source={{uri: 'http://exciting-father.surge.sh/cosmic_1.jpg'}}/>
+            <FitImage source={{uri: 'http://exciting-father.surge.sh/circuit_1.jpg'}} />
           </View>
         </TouchableHighlight>
 
         <TouchableHighlight onPress={this.navKineticField.bind(this)}>
           <View>
-            <FitImage
-              source={{uri: 'http://dng-com.s3.amazonaws.com/download/wavves/kinetic_field.jpg'}}/>
+            <FitImage source={{uri: 'http://exciting-father.surge.sh/kinetic_1.jpg'}} />
           </View>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={this.navWasteland.bind(this)}>
+        <TouchableHighlight onPress={this.navCosmicMeadow.bind(this)}>
           <View>
-            <FitImage
-              source={{uri: 'http://dng-com.s3.amazonaws.com/download/wavves/wasteland.jpg'}}/>
+            <FitImage source={{uri: 'http://exciting-father.surge.sh/cosmic_1.jpg'}} />
           </View>
         </TouchableHighlight>
 
-      
-    </View>
 
-    )
+
+
+      </View>
+      )
   }
 }

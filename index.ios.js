@@ -7,7 +7,7 @@ import React, { Component } from 'react'
 import Slider from 'react-native-slider'
 import FitImage from 'react-native-fit-image'
 import Drawer from 'react-native-drawer'
-import SideMenu from 'react-native-side-menu'
+import DrawerLayout from 'react-native-drawer-layout'
 import Food from './components/food'
 import Transportation from './components/transportation'
 import FirstAid from './components/firstAid'
@@ -24,6 +24,10 @@ import GateA from './components/gate_a'
 import GateB from './components/gate_b'
 import GateC from './components/gate_c'
 import GateD from './components/gate_d'
+import WhatsHot from './components/whats_hot'
+import WaitTimes from './components/wait_times'
+import MyPoints from './components/my_points'
+import RateNeon from './components/rate_neon'
 import Instructions from './components/instructions'
 import styles from './components/styles'
 import {
@@ -133,43 +137,64 @@ class Main extends React.Component{
       id: 'transportation_page'
     })
   }
+
+  navWhatsHot () {
+    this.props.navigator.push({
+      id: 'whats_hot'
+    })
+  }
+
+  navWaitTimes () {
+    this.props.navigator.push({
+      id: 'wait_times'
+    })
+  }
+  navMyPoints () {
+    this.props.navigator.push({
+      id: 'my_points'
+    })
+  }  
+  navRateNeon () {
+    this.props.navigator.push({
+      id: 'rate_neon'
+    })
+  }
   render() {
     return (
       
       <View style={styles.container}>
 
-        <TouchableHighlight onPress={this.navFirstAid.bind(this)} underlayColor="white">
+        <TouchableHighlight underlayColor="white">
           <View style={styles.logo_container}>
             <FitImage
               style={styles.logo}
-              source={{uri: 'http://wooden-brush.surge.sh/edcwavves.jpg'}}/>
+              source={{uri: 'http://didactic-twig.surge.sh/edcwavves.jpg'}}/>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.navWhatsHot.bind(this)}>
+          <View>
+            <FitImage
+              style={styles.flex}
+              source={{uri: 'http://safe-jar.surge.sh/whats_hot.jpg'}}/>
           </View>
         </TouchableHighlight>
 
 
-        <TouchableHighlight onPress={this.navStages.bind(this)}>
+        <TouchableHighlight onPress={this.navWaitTimes.bind(this)}>
           <View>
             <FitImage
               style={styles.flex}
-              source={{uri: 'http://possible-brass.surge.sh/whats_hot.jpg'}}/>
+              source={{uri: 'http://safe-jar.surge.sh/wait_times.jpg'}}/>
           </View>
         </TouchableHighlight>
 
 
-        <TouchableHighlight onPress={this.navTransportation.bind(this)}>
+        <TouchableHighlight onPress={this.navMyPoints.bind(this)}>
           <View>
             <FitImage
               style={styles.flex}
-              source={{uri: 'http://possible-brass.surge.sh/wait_times.jpg'}}/>
-          </View>
-        </TouchableHighlight>
-
-
-        <TouchableHighlight onPress={this.navRestrooms.bind(this)}>
-          <View>
-            <FitImage
-              style={styles.flex}
-              source={{uri: 'http://trashy-field.surge.sh/my_points.jpg'}}/>
+              source={{uri: 'http://safe-jar.surge.sh/my_points.jpg'}}/>
           </View>
         </TouchableHighlight>
 
@@ -238,6 +263,14 @@ class thumbaholic extends React.Component {
         return (<GateD navigator={navigator} title="gate_d" />)
       case 'instructions':
         return (<Instructions navigator={navigator} title="instructions" />)
+      case 'whats_hot':
+        return (<WhatsHot navigator={navigator} title="whats_hot" />)
+      case 'wait_times':
+        return (<WaitTimes navigator={navigator} title="wait_times" />)
+      case 'my_points':
+        return (<MyPoints navigator={navigator} title="my_points" />)
+      case 'rate_neon':
+        return (<RateNeon navigator={navigator} title="rate_neon" />)
     }
   }
 }

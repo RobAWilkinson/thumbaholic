@@ -12,6 +12,14 @@ export default class Food extends React.Component {
   render () {
     return (
     <View style={styles.container}>
+
+    <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+      <View style={styles.logo_container}>
+        <FitImage
+          style={styles.logo}
+          source={{uri: 'http://fantastic-surprise.surge.sh/back_btn.jpg'}}/>
+      </View>
+    </TouchableHighlight>
       <ScrollView>
         <View>
           <FitImage
@@ -25,13 +33,6 @@ export default class Food extends React.Component {
         </View>
       </ScrollView>
 
-      <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
-        <View style={styles.goback_container}>
-          <FitImage 
-            style={styles.goback} 
-            source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-        </View>
-      </TouchableHighlight>
     </View>
     )
   }

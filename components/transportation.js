@@ -37,20 +37,20 @@ export default class Transportation extends React.Component {
   render () {
     return (
     <View style={styles.entrance_container}>
+
+    <TouchableHighlight onPress={this.navMain.bind(this)} underlayColor="white">
+      <View style={styles.logo_container}>
+        <FitImage
+          style={styles.logo}
+          source={{uri: 'http://fantastic-surprise.surge.sh/back_btn.jpg'}}/>
+      </View>
+    </TouchableHighlight>
       <ScrollView>
         <View>
           <FitImage
             style={styles.entrance_background}
             source={{uri: 'http://bloody-toothbrush.surge.sh/entrance_background.jpg'}}/>
         </View>
-
-        <TouchableHighlight underlayColor="white">
-          <View style={styles.logo_container}>
-            <FitImage
-              style={styles.logo}
-              source={{uri: 'http://wooden-brush.surge.sh/edcwavves.jpg'}}/>
-          </View>
-        </TouchableHighlight>
 
         <TouchableHighlight onPress={this.navGateA.bind(this)}>
           <View>
@@ -82,14 +82,6 @@ export default class Transportation extends React.Component {
 
       </ScrollView>
 
-
-      <TouchableHighlight onPress={this.navMain.bind(this)}  underlayColor="white">
-        <View style={styles.goback_container}>
-          <FitImage 
-            style={styles.goback} 
-            source={{uri: 'http://narrow-songs.surge.sh/go_back.png'}} />
-        </View>
-      </TouchableHighlight>
     </View>
     )
   }
